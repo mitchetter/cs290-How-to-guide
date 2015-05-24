@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>How-To Guide</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link href="style.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body>
+    <h1>How-To Guide: Using the OMDb API</h1>
+    <h2>Mitch Etter, CS290-400, Spring 2015</h2><br />
+    <div id="introduction">
+      <h3><i>Introduction</i></h3><br />
+        <p>OMDb is an acronym for the Open Movie Database.  The OMDb API is a free web service which allows developers to access movie information.  The goal of this how-to guide will be to show the user how to get started using the API and then how to leverage the API to enhance the video inventory system that we developed in assignment4-part2.  All code will be written in PHP.  We will use the API to fetch the category (or genre) and length (or runtime) of the movie where these had be be manually inputted into the web form previously.  We will also add some new fields to the database table: rated and imdbID.  With imdbID, we can then fetch the poster for the movie and display that to the user as visual reference as it is added to the inventory system.  The service offers two useages - one for data requests and another for movie poster requests.  By default, a data call to the API for a particular movie will deliver the following information in JSON format (although XML format is also supported):
+        <ul>
+          <li>Title</li>
+          <li>Year (Released)</li>
+          <li>Rated</li>
+          <li>Released (Date)</li>
+          <li>Runtime</li>
+          <li>Genre</li>
+          <li>Director</li>
+          <li>Writer</li>
+          <li>Actors</li>
+          <li>Plot</li>
+          <li>Language</li>
+          <li>Country</li>
+          <li>Awards</li>
+          <li>Poster (URL)</li>
+          <li>Metascore</li>
+          <li>imdbRating</li>
+          <li>imdbVotes</li>
+          <li>imdbID</li>
+          <li>Type</li>
+          <li>Response</li>
+        </ul>
+      </p>
+    </div>
+    <div class="foot">
+      <p> 
+        <a href="useage.html"> Next Page </a> 
+      </p>  
+    </div>
+  <div class="foot" name="TOC">
+        <p>
+        <a href="index.html"> Introduction </a><br /> 
+        <a href="useage.html"> Useage Options</a><br /> 
+        <a href="parameters.html"> Parameters Used</a><br />  
+        <a href="integration.html"> Integration with the Database</a><br /> 
+        <a href="submit.html"> Submitting to the Database </a><br />  
+        <a href="demo.html"> Demonstrate the Solution </a><br />  
+      <p>
+    </div>        
+  </body>
+</html>

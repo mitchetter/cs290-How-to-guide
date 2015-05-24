@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>How-To Guide</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h1>How-To Guide: Using the OMDb API</h1>
+    <h2>Mitch Etter, CS290-400, Spring 2015</h2><br />
+    <div name="key">
+      <h3><i>Integration with Video Inventory System</i></h3><br />
+      <p>The first step to properly integrate the API into the video inventory system is to create a new database table or edit the previous database table with the newly added fields: rated and imdbID.  Next, code is needed to access the interesting data from the movie array.  We used the PHP function explode() in order to isolate genre into a single category and runtime to a string of only digits.  In some cases, the API will return multiple categories for genre.  Runtime is formated as "[number of minutes] 'min'".  We will want to write only a single category for genre and only the number for runtime to the database so we explode the original string into multiple strings.  This returns an array of strings.  We take this array and act on only the first index (index 0). See this illustrated below.</p>
+      <pre>
+        <code>
+          //Genre and Runtime values are strings in the array 
+          [Genre] => Crime, Drama 
+          [Runtime] => 175 min
+
+          //using explode() to take the first category listed
+          $genre = explode(",", $myArr['Genre']);
+
+          //using explode() to capture only the number of minutes
+          $time = explode(" ", $myArr['Runtime']);
+        </code>
+      </pre> 
+      <p>The remaining pieces of data can be obtained very simply by accessing the array indexes directly from their keys.  We now have the data formated correctly for use with the SQL database.  We add our variables to the $_SESSION array so that they can be used across multiple php files.</p>
+      <pre>
+        <code>
+          //hold variables in the session to be consumed by addVideo.php
+          $_SESSION['imdbID'] = $myArr['imdbID'];
+          $_SESSION['Title'] = $myArr['Title'];
+          $_SESSION['Rated'] = $myArr['Rated'];
+          $_SESSION['Genre'] = $genre[0];
+          $_SESSION['Runtime'] = $time[0];
+          $_SESSION['Poster'] = $myArr['Poster'];
+        </code>
+      </pre>  
+  </div>
+  <div class="foot">
+    <p>
+      <a href="parameters.html"> Previous Page </a><br />  
+      <a href="submit.html"> Next Page </a>
+    </p>  
+  </div> 
+  <div class="foot" name="TOC">
+       <p>
+        <a href="index.html"> Introduction </a><br /> 
+        <a href="useage.html"> Useage Options</a><br /> 
+        <a href="parameters.html"> Parameters Used</a><br />  
+        <a href="integration.html"> Integration with the Database</a><br /> 
+        <a href="submit.html"> Submitting to the Database </a><br />  
+        <a href="demo.html"> Demonstrate the Solution </a><br />  
+      <p>
+    </div>        
+  </body>
+</html>  

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>How-To Guide</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h1>How-To Guide: Using the OMDb API</h1>
+    <h2>Mitch Etter, CS290-400, Spring 2015</h2><br />
+    <div name="key">
+      <h3><i>Submitting to the Database</i></h3><br />
+      <p>Althought not required, I create new variables in the addVideo PHP file which are obtained from the $_SESSION array.</p>
+      <pre>
+        <code>
+          $newImdbID = $_SESSION['imdbID'];
+          $newName = $_SESSION['Title'];  
+          $newRating = $_SESSION['Rated'];
+          $newCategory = $_SESSION['Genre']; 
+          $newLength = $_SESSION['Runtime']; 
+          $newPoster = $_SESSION['Poster'];
+        </code>  
+      </pre>
+      <p>After checking that all of the variables have been received and are valid, we make similar calls to the SQL database as we did in assignment4-part2.  The only difference is that the table name has changed and we have added the new table fields to the prepared statement.</p>
+      <pre>
+        <code>
+          /* Prepared statement, stage 1: prepare */
+          if (!($stmt = $mysqli->prepare("INSERT INTO videoInventoryImproved(imdbID,name,category,length,rated) VALUES (?,?,?,?,?)"))) {
+          echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+          }
+
+        /* Prepared statement, stage 2: bind and execute */
+        if (!$stmt->bind_param("sssis", $newImdbID,$newName,$newCategory,$newLength,$newRating)) {
+        echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+
+        if (!$stmt->execute()) {
+        echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        </code>
+      </pre> 
+      <p>The data is now added to the database as it would have been had we manually typed it into an HTML form similar to our workflow in assignment4-part2.  We now make an additional call the the API.  This time we want to spice up our user experience a bit.  We will do this by calling the Poster API.  Remember, we need an API key for this call.  Alternatively, we could take the poster url from the array and render that to the screen.  I had better reliability by using the Poster API call.  Both will work, but I prefer the dedicated API call with the imdbID and API key.</p>
+      <pre>
+        <code>
+          //preferred method - making a call to the Poster API
+          &lt;img src="http://img.omdbapi.com/?apikey=&lt;?php echo $myKey?>&i=&lt;?php echo $newImdbID?>" alt="Poster Image Not Found"/>
+
+          //alternative method - render the image from the array poster url value
+          &lt;img src= "&lt;?php echo $newPoster ?>" alt="Poster Image Not Found"/>
+        </code>
+      </pre>
+      <p>The end result is a movie added to our inventory system (written to the SQL database) with the IMDB ID, Name, Category, Length, and Rated database field values fetched from the OMDb API call.</p>
+      </p> 
+        <br />
+        <img src = "sshot-entry.png" alt = "Image File Not Found!" />  
+        <br />    
+        <p>There will also be a visual confirmation that we have added the correct movie with the OMDb Poster API call.</p>
+        <br />
+        <img src = "sshot-poster.png" alt = "Image File Not Found!" /> 
+        <br /><br /><p><i>Please note:  Not all movies will have an associated poster image.  In such cases, you will not see an image rendered to the screen.  Most every movie that I tested with did have an image.  Older movies, mini-series, and television series were the less likely to provide an image.</i></p>
+  </div>
+  <div class="foot">
+    <p>
+      <a href="integration.html"> Previous Page </a><br />  
+      <a href="demo.html"> Next Page </a>
+    </p>  
+  </div> 
+  <div class="foot" name="TOC">
+      <p>
+        <a href="index.html"> Introduction </a><br /> 
+        <a href="useage.html"> Useage Options</a><br /> 
+        <a href="parameters.html"> Parameters Used</a><br />  
+        <a href="integration.html"> Integration with the Database</a><br /> 
+        <a href="submit.html"> Submitting to the Database </a><br />  
+        <a href="demo.html"> Demonstrate the Solution </a><br />  
+      <p>
+    </div>        
+  </body>
+</html>  

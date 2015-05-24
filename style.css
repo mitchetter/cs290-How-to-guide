@@ -1,0 +1,50 @@
+body {
+	background-color: lightgray;
+}
+
+ul {
+    list-style-type: none;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    font-size: large;
+}
+
+li:before {
+  content: "• ";
+}
+
+div {
+	margin: 5%;
+}
+
+#introduction {
+	margin-top: 0%;
+}
+
+.foot a {
+	background-color: black;
+	border-radius: 50%;
+	color: darkorange;
+	padding: 0px 20px;
+	margin: 5px 0px;
+}
+
+p {
+	font-size: large;
+}
+
+h1 {
+	background-color: darkorange;
+	padding: .5% 5%;
+	width: 100%;
+	margin: 0px;
+}
+
+h2 {
+	background-color: black;
+	color: white;
+	padding: .5% 5%;
+	width: 100%;
+	margin: 0px;
+}

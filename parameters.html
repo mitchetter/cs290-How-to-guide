@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>How-To Guide</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h1>How-To Guide: Using the OMDb API</h1>
+    <h2>Mitch Etter, CS290-400, Spring 2015</h2><br />
+    <div name="key">
+      <h3><i>Parameters and Initial Call</i></h3><br />
+      <p>The full list of parameters can be found at the <a href="http://www.omdbapi.com/">OMDb API site</a>.  We will only use the search parameter and obtain the data in the default JSON format.  As stated earlier, the goal is to leverage the API to enhance our video inventory system.  The user is expected to give a search string movie title and we will use the API to search for the movie and, if found, obtain the remaining movie data.  Therefore, we will initially make a data only API request with the 't' parameter used to search for the title.  If the title is multiple words, words must be joined with '+' character.  That code looks like this: </p>
+      <pre>
+        <code>
+          //the form data from the user
+          $newName = $_GET["Title"];  
+
+          //replace any whitespaces with '+' needed for multi-word strings
+          $searchName = preg_replace('/\s+/', '+', $newName);
+
+          //make the call with the search string, returning json object
+          $jsonObj = file_get_contents("http://www.omdbapi.com/?t=$searchName");
+        </code>
+      </pre>  
+      <p>Now that we have made the call to the API, we will get a JSON object to work with so long as the value of key "Response" is not equal to "False".  An example of a return as JSON object looks like this: </p>
+      <pre>
+        <code>
+          {"Title":"The Godfather","Year":"1972","Rated":"R","Released":"24 Mar 1972","Runtime":"175 min","Genre":"Crime, Drama","Director":"Francis Ford Coppola","Writer":"Mario Puzo (screenplay), Francis Ford Coppola (screenplay), Mario Puzo (novel)","Actors":"Marlon Brando, Al Pacino, James Caan, Richard S. Castellano","Plot":"The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.","Language":"English, Italian, Latin","Country":"USA","Awards":"Won 3 Oscars. Another 30 wins & 19 nominations.","Poster":"http://ia.media-imdb.com/images/M/MV5BMjEyMjcyNDI4MF5BMl5BanBnXkFtZTcwMDA5Mzg3OA@@._V1_SX300.jpg","Metascore":"100","imdbRating":"9.2","imdbVotes":"965,176","imdbID":"tt0068646","Type":"movie","Response":"True"}
+          </code>
+      </pre> 
+      <p>We will then decode the JSON object into an array that can be used to extract the meaningful data for the video inventory system.  The code:</p>
+      <pre>
+        <code>
+          //decode json object into an array
+          $myArr = (json_decode($jsonObj, true));
+        </code>
+      </pre>
+      <p>The resulting array follows: </p>
+      <pre>
+        <code>
+          Array ( [Title] => The Godfather [Year] => 1972 [Rated] => R [Released] => 24 Mar 1972 [Runtime] => 175 min [Genre] => Crime, Drama [Director] => Francis Ford Coppola [Writer] => Mario Puzo (screenplay), Francis Ford Coppola (screenplay), Mario Puzo (novel) [Actors] => Marlon Brando, Al Pacino, James Caan, Richard S. Castellano [Plot] => The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son. [Language] => English, Italian, Latin [Country] => USA [Awards] => Won 3 Oscars. Another 30 wins & 19 nominations. [Poster] => http://ia.media-imdb.com/images/M/MV5BMjEyMjcyNDI4MF5BMl5BanBnXkFtZTcwMDA5Mzg3OA@@._V1_SX300.jpg [Metascore] => 100 [imdbRating] => 9.2 [imdbVotes] => 965,176 [imdbID] => tt0068646 [Type] => movie [Response] => True ) 
+        </code>
+      </pre>    
+  </div>
+  <div class="foot">
+    <p>
+      <a href="useage.html"> Previous Page </a><br />  
+      <a href="integration.html"> Next Page </a>
+    </p>  
+  </div> 
+  <div class="foot" name="TOC">
+      <p>
+        <a href="index.html"> Introduction </a><br /> 
+        <a href="useage.html"> Useage Options</a><br /> 
+        <a href="parameters.html"> Parameters Used</a><br />  
+        <a href="integration.html"> Integration with the Database</a><br /> 
+        <a href="submit.html"> Submitting to the Database </a><br />  
+        <a href="demo.html"> Demonstrate the Solution </a><br />  
+      <p>
+    </div>        
+  </body>
+</html>  

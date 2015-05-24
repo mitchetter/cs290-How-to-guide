@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>How-To Guide</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h1>How-To Guide: Using the OMDb API</h1>
+    <h2>Mitch Etter, CS290-400, Spring 2015</h2><br />
+    <div name="key">
+      <h3><i>Useage</i></h3><br />
+      <p>
+        This guide will illustrate how to make the basic API calls in PHP.  One thing to note is that you do not need an API key to use the data only service call.  According to the publisher, this very well may change in the near future.  If you want to make poster API requests, you do need an API key.
+
+        To gain an API key for the poster content, you will need to access <a href="http://beforethecode.com/projects/omdb/apikey.aspx"> this page </a> and request a key.  Please note that the key will not become active until you donate to the website.  All site content is contributed, maintained and tested by the service users.  Donators are considered testers to the poster API and therefore are the only users who have valid access to the API.  I donated only $10 USD and I considered it a small price to pay to be able to play with this feature.  You can get the poster URL free without a key but not direct access to the image without the key.  The form for API key access looks like this:
+      </p> 
+        <br />
+        <img src = "sshot-key.png" alt = "Image File Not Found!" />  
+        <br />    
+    </div>
+    <div name="examples">
+        <p>Here is the syntax of the two calls that can be made: <br /></p>
+        <p>Data Only API Request</p>
+          <pre>
+            <code>http://www.omdbapi.com/?</code>
+          </pre>  
+        <p>Poster API Request</p>
+          <pre>
+            <code>http://img.omdbapi.com/?apikey=[yourkey]&</code> 
+          </pre>   
+    </div>
+    <div class="foot">
+      <p>
+        <a href="index.html"> Previous Page </a><br />  
+        <a href="parameters.html"> Next Page </a> 
+      </p>  
+    </div> 
+    <div class="foot" name="TOC">
+      <p>
+        <a href="index.html"> Introduction </a><br /> 
+        <a href="useage.html"> Useage Options</a><br /> 
+        <a href="parameters.html"> Parameters Used</a><br />  
+        <a href="integration.html"> Integration with the Database</a><br /> 
+        <a href="submit.html"> Submitting to the Database </a><br />  
+        <a href="demo.html"> Demonstrate the Solution </a><br />  
+      <p>
+    </div>         
+  </body>
+</html>      
